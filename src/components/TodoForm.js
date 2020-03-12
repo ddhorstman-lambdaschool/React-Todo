@@ -1,4 +1,5 @@
 import React from "react";
+import "./Todo.scss";
 
 export default class TodoForm extends React.Component {
   constructor(props) {
@@ -21,15 +22,18 @@ export default class TodoForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          name="task"
-          id="task"
-          value={this.state.task}
-          onChange={this.handleChange}
-        />
-        <input type="submit" value="Add Task" />
-      </form>
+      <div className="todo-form">
+        <form onSubmit={this.handleSubmit}>
+          <input
+            name="task"
+            id="task"
+            value={this.state.task}
+            onChange={this.handleChange}
+          />
+          <input type="submit" value="Add Task" />
+        </form>
+        <button onClick={this.props.clearCompleted}>Clear Completed</button>
+      </div>
     );
   }
 }

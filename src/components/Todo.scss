@@ -1,0 +1,26 @@
+.todo-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  .task {
+    border: 1px solid black;
+    margin: 5px;
+    padding: 5px;
+    width: 40%;
+    display: flex;
+    &.completed {
+      border-color: darkgrey;
+      background-color: lightgrey;
+      text-decoration: line-through;
+      color: darkgrey;
+    }
+  }
+}
+
+.todo-form {
+  display: flex;
+  & > * {
+    margin: 0px 5px;
+  }
+}
