@@ -45,6 +45,7 @@ class App extends React.Component {
 
   rearrangeItem = (item, target) => {
     console.log(`dragged ${item} onto ${target}`);
+    //ignore drags that don't change order
     if (item === target) return;
     const draggedItem = this.state.tasks.find(
       x => String(x.id) === String(item)
@@ -55,9 +56,11 @@ class App extends React.Component {
         ? this.state.tasks.length
         : this.state.tasks.findIndex(x => String(x.id) === String(target));
     console.log(targetIndex);
+    //remove dragged item from the array, but keep its place
     let newArray = this.state.tasks.map(x =>
       String(x.id) === String(item) ? { task: null } : x
     );
+    //handle dragging actions
     if (targetIndex === 0) newArray.unshift(draggedItem);
     else if (targetIndex === this.state.tasks.length)
       newArray.push(draggedItem);
@@ -66,6 +69,7 @@ class App extends React.Component {
       const end = newArray.slice(targetIndex, newArray.length);
       newArray = start.concat(draggedItem).concat(end);
     }
+    //remove the empty placeholder from the array
     newArray = newArray.filter(x => x.task);
     this.setState({ tasks: newArray });
   };

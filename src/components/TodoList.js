@@ -19,7 +19,9 @@ export default class TodoList extends React.Component {
   dragOver = ({ target: { id } }) => {
     this.setState({ dragTarget: id });
   };
-  stopDrag = () => {
+  stopDrag = e => {
+    console.log(e.target);
+    console.log("done dragging");
     if (this.state.dragTarget !== 0)
       this.props.rearrangeItem(this.state.draggedItem, this.state.dragTarget);
     this.setState({ draggedItem: 0 });
