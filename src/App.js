@@ -6,9 +6,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: []
+      tasks: JSON.parse(localStorage.getItem("tasks") || "[]")
     };
   }
+  componentDidUpdate = () => {
+    localStorage.setItem("tasks", JSON.stringify(this.state.tasks));
+  };
   addTask = task => {
     this.setState({
       tasks: [
