@@ -33,7 +33,7 @@ export default class TodoList extends React.Component {
         {this.props.tasks.map(task => (
           <li
             id={task.id}
-            draggable
+            draggable={!!this.props.tasks[1]}
             onDragStart={this.startDrag}
             onDragEnd={this.stopDrag}
             key={task.id}
