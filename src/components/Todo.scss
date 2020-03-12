@@ -24,3 +24,8 @@
     margin: 0px 5px;
   }
 }
+.drag-target {
+  &.selected {
+    background-color:navy;
+  }
+}
