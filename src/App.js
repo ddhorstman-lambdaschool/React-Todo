@@ -6,11 +6,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: [] //JSON.parse(localStorage.getItem("tasks") || "[]")
+      tasks: JSON.parse(localStorage.getItem("tasks") || "[]")
     };
   }
   componentDidUpdate = () => {
-    //localStorage.setItem("tasks", JSON.stringify(this.state.tasks));
+    localStorage.setItem("tasks", JSON.stringify(this.state.tasks));
   };
   addTask = task => {
     this.setState({
@@ -18,7 +18,12 @@ class App extends React.Component {
         ...this.state.tasks,
         {
           task,
-          id: task + Date.now(),
+          id: this.state.tasks[0]
+            ? Math.max.apply(
+                null,
+                this.state.tasks.map(task => Number(task.id))
+              ) + 1
+            : 0,
           completed: false
         }
       ]
@@ -52,6 +57,7 @@ class App extends React.Component {
     );
     console.log(draggedItem);
     const targetIndex =
+      //end of list has an id of -1
       String(target) === "-1"
         ? this.state.tasks.length
         : this.state.tasks.findIndex(x => String(x.id) === String(target));
