@@ -55,10 +55,18 @@ class App extends React.Component {
         ? this.state.tasks.length
         : this.state.tasks.findIndex(x => String(x.id) === String(target));
     console.log(targetIndex);
-    let newArray = this.state.tasks.filter(x => String(x.id) !== String(item));
+    let newArray = this.state.tasks.map(x =>
+      String(x.id) === String(item) ? { task: null } : x
+    );
     if (targetIndex === 0) newArray.unshift(draggedItem);
     else if (targetIndex === this.state.tasks.length)
       newArray.push(draggedItem);
+    else {
+      const start = newArray.slice(0, targetIndex);
+      const end = newArray.slice(targetIndex, newArray.length);
+      newArray = start.concat(draggedItem).concat(end);
+    }
+    newArray = newArray.filter(x => x.task);
     this.setState({ tasks: newArray });
   };
   // you will need a place to store your state in this component.
