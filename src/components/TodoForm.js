@@ -14,6 +14,7 @@ export default class TodoForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    if (!this.state.task) return;
     this.props.addTask(this.state.task);
     this.setState({ task: "" });
   };
@@ -27,7 +28,7 @@ export default class TodoForm extends React.Component {
           value={this.state.task}
           onChange={this.handleChange}
         />
-        <input type="submit" />
+        <input type="submit" value="Add Task" />
       </form>
     );
   }

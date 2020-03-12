@@ -10,7 +10,19 @@ class App extends React.Component {
     };
   }
   addTask = task => {
-    console.log(task);
+    const nextId = this.state.tasks[0]
+      ? this.state.tasks[this.state.tasks.length - 1].id + 1
+      : 1;
+    this.setState({
+      tasks: [
+        ...this.state.tasks,
+        {
+          task,
+          id: nextId,
+          completed: false
+        }
+      ]
+    });
   };
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
